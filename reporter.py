@@ -8,7 +8,6 @@ requests.packages.urllib3.disable_warnings()
 
 tr_project = os.environ.get('TESTRAIL_PROJECT')
 tr_milestone = os.environ.get('TESTRAIL_MILESTONE')
-
 tr_suite = os.environ.get('TESTRAIL_SUITE')
 tr_testplan = os.environ.get('TESTRAIL_PLAN')
 tr_testrun = os.environ.get('TESTRAIL_RUN', tr_suite)
@@ -142,9 +141,12 @@ class Reporter:
 
             self.tr_project.add(result)
 
+    def print_run_url(self, test_run):
+        msg = '[TestRun URL] {}/index.php?/runs/view/{}'
+        print(msg.format(self._config['testrail']['base_url'], test_run.id))
 
-if __name__ == __main__:
+if __name__ =='__main__':
     tc = parse_xml()
     p = Reporter(tr_project, tr_milestone, tr_suite, tr_testplan,
                  tr_testrun, tc)
-
+    
